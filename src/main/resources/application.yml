@@ -1,0 +1,40 @@
+server:
+  port: 8001
+
+# 多数据库读写分离
+spring:
+  datasource:
+    master:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/db_mysql_read_write_1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.jdbc.Driver
+    slave1:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/db_mysql_read_write_2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+      username: root   # 只读库
+      password: 123456
+      driver-class-name: com.mysql.jdbc.Driver
+    slave2:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/db_mysql_read_write_3?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+      username: root   # 只读库
+      password: 123456
+      driver-class-name: com.mysql.jdbc.Driver
+
+## 单个数据库配置
+#spring:
+#  application:
+#    name: seckill-service
+#  # mysql数据源配置
+#  datasource:
+#    url: jdbc:mysql://127.0.0.1:3306/db_mysql_read_write_1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+#    username: root
+#    password: 123456
+#    driverClassName: com.mysql.jdbc.Driver
+
+# mybatis相关配置
+mybatis:
+  typeAliasesPackage: com.wyp.entity
+  mapper-locations: classpath:mapper/*.xml
+   # 开启驼峰命名
+  configuration:
+     mapUnderscoreToCamelCase: true
