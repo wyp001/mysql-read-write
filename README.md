@@ -6,11 +6,12 @@
 >
 > 然而，应用程序层面去做读写分离最大的弱点（不足之处）在于无法动态增加数据库节点，因为数据源配置都是写在配置中的，新增数据库意味着新加一个数据源，必然改配置，并重启应用。当然，好处就是相对简单。
 
-![image-20201117163331033](C:\Users\18345\AppData\Roaming\Typora\typora-user-images\image-20201117163331033.png)
+![image-20201117163331033](.\images\image-20201117163331033.png)
 
 ##  2、AbstractRoutingDataSource
 基于特定的查找key路由到特定的数据源。它内部维护了一组目标数据源，并且做了路由key与目标数据源之间的映射，提供基于key查找数据源的方法。
-![image-20201117163533780](C:\Users\18345\AppData\Roaming\Typora\typora-user-images\image-20201117163533780.png)
+![image-20201117163533780](./images/image-20201117163533780.png)
+
 ## 3、实践
 ### 3-1、环境准备
 ①三个数据库
@@ -433,12 +434,12 @@ class MysqlReadWriteApplicationTests {
 
 读操作时只在只读库之间切换，没有去master库上读取
 
-![image-20201117165653187](C:\Users\18345\AppData\Roaming\Typora\typora-user-images\image-20201117165653187.png)
+![image-20201117165653187](.\images\image-20201117165653187.png)
 
 insert、update、delete等写操作会切换到master上执行写操作
 
-![image-20201117165925626](C:\Users\18345\AppData\Roaming\Typora\typora-user-images\image-20201117165925626.png)
+![image-20201117165925626](.\images\image-20201117165925626.png)
 
 一些需要从master读取的数据，通过使用自定义注解@Master后，去操作也去master数据库中读取
 
-![image-20201117170027953](C:\Users\18345\AppData\Roaming\Typora\typora-user-images\image-20201117170027953.png)
+![image-20201117170027953](.\images\image-20201117170027953.png)
